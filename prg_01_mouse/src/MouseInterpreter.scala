@@ -2,7 +2,7 @@
  * CS3210 - Principles of Programming Languages - Fall 2021
  * Instructor: Thyago Mota
  * Description: Prg 01 - MouseInterpreter
- * Student(s) Name(s):
+ * Student(s) Name(s): Austin Boyd 
  */
 
 import scala.collection.mutable
@@ -168,7 +168,7 @@ class MouseInterpreter(private var parseTree: Tree) {
 object MouseInterpreter {
 
   // set this to true to see detailed debug info
-  val DEBUG = false
+  val DEBUG = true
 
   def main(args: Array[String]): Unit = {
 
@@ -178,7 +178,7 @@ object MouseInterpreter {
       System.exit(1)
     }
 
-    val syntaxAnalyzer = new SyntaxAnalyzer(args(0))
+    val syntaxAnalyzer = new SyntaxAnalyzer(args("example1.mouse"))
     val parseTree = syntaxAnalyzer.parse()
     val interpreter = new MouseInterpreter(parseTree)
     interpreter.run()

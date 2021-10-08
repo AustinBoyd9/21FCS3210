@@ -85,6 +85,46 @@ class LexicalAnalyzer(private var source: String) extends Iterable[Lexeme]{
         if (!hasNext)
           return new Lexeme("eof", Token.EOF)
 
+        var c = getChar()
+        if (hasLetter())
+          {
+            val str = c + ""
+            nextChar()
+            while(!eof && (hasLetter() || hasDigit()) ) {
+              str += getChar()
+              nextChar()
+            }
+            return new Lexeme(str, Token.IDENTIFIER)
+          }
+        else if (hasDigit()) {
+          var str = ""
+          while(!eof && hasDigit()) {
+            str += getChar()
+            nextChar()
+          }
+          return new Lexeme(str, Token.LITERAL)
+        }
+        else if (c== '+') {
+          val srt = c + ""
+          nextChar()
+          return new Lexeme(str, Token.ADDITION)
+        }
+        else if (c == '-') {
+          val str = c + ""
+          nextChar()
+          return new Lexeme(str, Token.SUBTRACTION)
+        }
+        else if (c == '*') {
+          val str = c + ""
+          nextChar()
+          return new Lexeme(str, Token.MULTIPLICATION)
+        }
+        else if (c == '/') {
+          val str = c + ""
+          nextChar()
+          return new Lexeme(str, Token.DIVISION)
+        }
+
 
         // throw an exception if an unrecognizable symbol is found
         throw new Exception("Lexical Analyzer Error: unrecognizable symbol found!")
